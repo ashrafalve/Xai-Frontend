@@ -1,81 +1,121 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface StageCardProps {
-  number: number;
+  number: string;
   title: string;
   description: string;
+  isActive: boolean;
+  type: "ingest" | "analyze" | "insight";
 }
 
-function StageCard({ number, title, description }: StageCardProps) {
+function StageCard({ number, title, description, isActive, type }: StageCardProps) {
+  // Generate random animation delays for the equalizer bars
+  const bars = Array.from({ length: 9 }, (_, idx) => ({
+    height: 12 + Math.abs(Math.sin(idx * 0.8)) * 32,
+    delay: idx * 0.1,
+  }));
+
   return (
-    <div className="stage-card flex flex-col rounded-2xl border border-border bg-surface2 p-6 transition-all duration-500">
-      <div className="flex-1">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/20 text-sm font-medium text-accent">
-          {number}
-        </span>
-        <h3 className="mt-4 text-xl font-semibold text-text">{title}</h3>
-        <p className="mt-2 text-sm text-text2">{description}</p>
+    <motion.div
+      initial={false}
+      animate={{
+        borderColor: isActive ? "rgba(124, 108, 255, 0.4)" : "rgba(38, 38, 43, 0.5)",
+        backgroundColor: isActive ? "rgba(19, 19, 22, 0.85)" : "rgba(27, 27, 31, 0.3)",
+        opacity: isActive ? 1 : 0.45,
+        y: isActive ? -6 : 0,
+        boxShadow: isActive ? "0 10px 30px -10px rgba(124, 108, 255, 0.15)" : "none",
+      }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className="flex flex-col justify-between rounded-xl border p-8 h-[280px] relative overflow-hidden transition-all duration-350 cursor-pointer select-none group"
+    >
+      {/* Light glow inside when active */}
+      {isActive && (
+        <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-accent2/5 pointer-events-none" />
+      )}
+
+      <div>
+        <div className="flex items-center justify-between">
+          <span className={`text-xs font-semibold ${isActive ? "text-accent2" : "text-text3"} tracking-widest`}>
+            {number}
+          </span>
+          {type === "analyze" && isActive && (
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent2 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent2"></span>
+            </span>
+          )}
+        </div>
+        <h3 className="mt-6 text-xl font-medium text-text tracking-wide">{title}</h3>
+        <p className="mt-3 text-sm text-text2 leading-relaxed font-normal">{description}</p>
       </div>
-      <div className="mt-6 flex items-end gap-1.5">
-        {[0.6, 0.8, 0.5, 0.9, 0.7].map((height, i) => (
-          <div
+
+      {/* Visual Component in Card Footer */}
+      <div className="mt-8 flex items-end gap-1.5 h-12">
+        {bars.map((bar, i) => (
+          <motion.div
             key={i}
-            className="bar w-3 rounded-sm bg-accent/30 transition-all duration-500"
-            style={{ height: `${height * 24}px` }}
+            animate={
+              isActive
+                ? {
+                  height: [
+                    `${bar.height * 0.4}px`,
+                    `${bar.height}px`,
+                    `${bar.height * 0.6}px`,
+                    `${bar.height * 1.1}px`,
+                    `${bar.height * 0.4}px`,
+                  ],
+                }
+                : { height: `${bar.height * 0.25}px` }
+            }
+            transition={{
+              duration: isActive ? 1.5 + (i % 3) * 0.2 : 0,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: bar.delay,
+            }}
+            className={`w-[7px] rounded-md transition-colors duration-450 ${isActive
+                ? type === "analyze"
+                  ? "bg-accent2 shadow-[0_0_8px_rgba(51,229,199,0.4)]"
+                  : type === "ingest"
+                    ? "bg-[#7C6CFF]/85 shadow-[0_0_8px_rgba(124,108,255,0.4)]"
+                    : "bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.4)]"
+                : "bg-surface border border-border/80"
+              }`}
           />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export function InsightFlow() {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>(".stage-card");
-
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: "top 40%",
-        end: "bottom 60%",
+        start: "top 45%",
+        end: "bottom 55%",
         onUpdate: (self) => {
           const progress = self.progress;
-          const activeIndex = Math.min(Math.floor(progress * 3), 2);
-
-          cards.forEach((card, i) => {
-            const isActive = i === activeIndex || (i === 2 && progress > 0.66);
-            if (isActive) {
-              gsap.to(card, {
-                borderColor: "var(--color-accent)",
-                backgroundColor: "var(--color-surface)",
-                duration: 0.3,
-                ease: "power2.out",
-              });
-              gsap.to(card.querySelectorAll(".bar"), {
-                backgroundColor: "var(--color-accent)",
-                duration: 0.3,
-                ease: "power2.out",
-              });
-            } else {
-              gsap.to(card, {
-                borderColor: "var(--color-border)",
-                backgroundColor: "var(--color-surface2)",
-                duration: 0.3,
-                ease: "power2.out",
-              });
-              gsap.to(card, { opacity: 0.7, duration: 0.3, ease: "power2.out" });
-            }
-          });
+          // Split progress (from 0 to 1) into 3 brackets: 0 -> Stage 1, 0.33 -> Stage 2, 0.66 -> Stage 3
+          let idx = 0;
+          if (progress > 0.35 && progress <= 0.7) {
+            idx = 1;
+          } else if (progress > 0.7) {
+            idx = 2;
+          }
+          setActiveIndex(idx);
         },
       });
     }, sectionRef);
@@ -84,29 +124,36 @@ export function InsightFlow() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-32 px-6">
+    <section ref={sectionRef} id="stages" className="py-28 px-8 bg-bg relative overflow-hidden border-b border-border/20">
+      <div className="absolute top-[30%] left-[20%] w-[350px] h-[350px] bg-accent2/2.5 rounded-full blur-[100px] pointer-events-none" />
+
       <div className="mx-auto max-w-6xl">
         <SectionHeader
-          eyebrow="How It Works"
+          eyebrow="STAGES"
           title="Three stages. One continuous flow."
-          subtitle="From ingestion to insight, our platform orchestrates your data journey."
         />
 
-        <div ref={cardsRef} className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
           <StageCard
-            number={1}
+            number="01"
             title="Ingest Data"
-            description="Upload files, connect APIs, or stream real-time data. We support all major formats and protocols."
+            description="Automatically ingest data from any source - databases, APIs, documents, or event streams."
+            isActive={activeIndex === 0}
+            type="ingest"
           />
           <StageCard
-            number={2}
+            number="02"
             title="Analyze with AI"
-            description="Our models process and structure your data, identifying patterns and relationships automatically."
+            description="Structure, clean, and enrich files with modern AI models tailored to your business needs."
+            isActive={activeIndex === 1}
+            type="analyze"
           />
           <StageCard
-            number={3}
+            number="03"
             title="Generate Insight"
-            description="Get structured reports, visualizations, and actionable recommendations tailored to your needs."
+            description="Transform analyzed results into automated actions and alerts for your workflows."
+            isActive={activeIndex === 2}
+            type="insight"
           />
         </div>
       </div>

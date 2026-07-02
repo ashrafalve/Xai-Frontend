@@ -1,43 +1,92 @@
-# Xai Intelligence Workspace
+# Xai – Intelligence Workspace
+### High-Fidelity Product Experience Prototype
 
-A prototype demonstrating an AI-powered data intelligence platform: transforming raw data → structured intelligence → actionable insight → AI automations. Built as a marketing site with interactive 3D visuals and scroll-driven animations.
+This repository contains the engineering execution of the RacoAI Frontend Challenge. It is a single-page interactive product prototype that visually explains how Xai ingest, processes, and morphs raw data into structured intelligence and actionable automation pipelines.
 
-## Tech Stack
+Live URL: [https://xai-workspace.vercel.app](https://xai-workspace.vercel.app)  
+Design File: [Figma Mockup Design](https://www.figma.com/design/nIA9tZFp8SWQPPL6zevbJl/Untitled?node-id=0-1&t=kxy29yHTcyMCaDcf-1)
 
-- **Next.js 14+** (App Router) - React framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling with custom design tokens
-- **Framer Motion** - Component entrance animations
-- **GSAP + ScrollTrigger** - Scroll-driven state changes
-- **React Three Fiber / Three.js** - 3D particle scenes
+---
 
-## Getting Started
+## 🛠️ Technology Stack
 
+- **Framework:** Next.js 16 (App Router, Turbopack bundling)
+- **Programming Language:** TypeScript (strict type checking enabled)
+- **Styling Architecture:** Tailwind CSS v4 using semantic color configurations (`bg`, `surface`, `border`, `accent`, `accent2`)
+- **Animation System:** Framer Motion (choreography, layouts, and spring components)
+- **Scroll Timelines:** GSAP v3 + ScrollTrigger (viewport active state coordination)
+- **3D Graphics Graphics:** Three.js + React Three Fiber + `@react-three/drei` (WebGL points, neural connections, and orbit controls)
+
+---
+
+## 📁 Repository Directory Structure
+
+```
+xai/
+├── app/
+│   ├── globals.css      # Custom design tokens, Tailwind v4 imports, global rules
+│   ├── layout.tsx       # Next.js workspace viewport configurations
+│   └── page.tsx         # Page assembly rendering Hero, Stages, Dashboard & Signature
+├── src/
+│   ├── components/
+│   │   ├── sections/
+│   │   │   ├── Hero.tsx                 # Hero section layout + 3D particle canvas
+│   │   │   ├── InsightFlow.tsx         # Scroll spotlight stages + waveform equalizers
+│   │   │   ├── DashboardPreview.tsx    # Live SaaS dashboard shell + sidebar state machine
+│   │   │   └── SignatureInteraction.tsx # Interactive WebGL panel grid & deliverables
+│   │   ├── ui/
+│   │   │   ├── Button.tsx               # Reusable spring motion buttons
+│   │   │   ├── NavBar.tsx               # Sticky blurring top navigation links
+│   │   │   └── SectionHeader.tsx        # Standardized eyebrow / title header layout
+│   │   └── three/
+│   │       ├── ParticleField.tsx        # Hero transition nodes (chaos to grid layout)
+│   │       └── ClusterScene.tsx         # Multi-canvas Chaos, Process, and Order scenes
+├── product_experience_prototype_documentation.md  # Step-by-step layout & concept breakdown
+└── README.md            # Installation and engineering summary
+```
+
+---
+
+## 🚀 Running the Project Locally
+
+### Prerequisites
+Make sure you have Node.js 18+ and npm installed.
+
+### 1. Clone the repository and hop inward:
 ```bash
-git clone <repo-url>
-cd xai
+git clone https://github.com/ashik-racoai/xai-workspace.git
+cd xai-workspace/xai
+```
+
+### 2. Install dependencies:
+```bash
 npm install
+```
+
+### 3. Start page server locally:
+```bash
 npm run dev
 ```
 
-Open http://localhost:3000. Node.js 18+ recommended.
+The prototype will launch at `http://localhost:3000`.
 
-## Project Structure
-
-```
-src/
-├── components/
-│   ├── sections/   # Page sections (Hero, InsightFlow, DashboardPreview, SignatureInteraction)
-│   ├── ui/         # Reusable components (Button, NavBar, SectionHeader)
-│   └── three/      # R3F scenes (ParticleField, ClusterScene)
+### 4. Build bundle locally:
+```bash
+npm run build
 ```
 
-## Key Animation & Interaction Decisions
+---
 
-- **Hero**: Particles → grid visualization represents raw data organizing into structured form
-- **Insight Flow**: GSAP ScrollTrigger drives active card state based on viewport center
-- **Signature Interaction**: Scroll progress directly interpolates particle positions to 3D lattice
+## ⚡ Key Animation & Interaction Decisions
 
-[Video walkthrough: link here]
+1.  **Hero Transition Scene:** Rather than loaded marketing vector assets, the Three.js Canvas visualizes raw nodes floating chaotic purple on the left mapping to grid points that pulse in teal/green on the right. Vertices calculations are optimized via React `useMemo` hooks, and mouse tracking inputs dynamically repel dots.
+2.  **Scroll Spotlight Stages:** In the "Three stages. One continuous flow" section, GSAP ScrollTrigger detects viewport offsets. The card in center spotlight expands and plays an equalizer wave representation of processing data, while other stages dim.
+3.  **Active Dashboard States:** Click selections in the sidebar navigation trigger dynamic changes across the dashboard. Stats, chart data averages, and logging rows cross-fade smoothly using Framer Motion `AnimatePresence`. Bar metrics feature interactive tooltips displaying absolute runs.
+4.  **Multi-Scene Signature Interaction:** The final section lists three separate Three.js Canvases side-by-side representing Chaos, Process, and Order. OrbitControls permit mouse scrolls to zoom and drag rotations. Clicking node shapes maps parameter data to an overlay HUD display.
 
-[Live demo: link here]
+---
+
+## 📄 Deliverable Links
+- **Product Documentation:** Detailed design choices are documented at `product_experience_prototype_documentation.md`.
+- **Live Deployment:** [xai-workspace.vercel.app](https://xai-workspace.vercel.app)
+- **Figma Design Link:** [Figma Design Canvas](https://www.figma.com/design/nIA9tZFp8SWQPPL6zevbJl/Untitled?node-id=0-1&t=kxy29yHTcyMCaDcf-1)

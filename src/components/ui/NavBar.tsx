@@ -17,35 +17,33 @@ export function NavBar() {
   }, []);
 
   const navLinks = [
-    { label: "Product", href: "#" },
-    { label: "Platform", href: "#" },
-    { label: "Insights", href: "#" },
-    { label: "Docs", href: "#" },
+    { label: "DATA ENGINE", href: "#" },
+    { label: "PLATFORM", href: "#" },
+    { label: "INSIGHTS", href: "#" },
+    { label: "DOCS", href: "#" },
   ];
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300"
-      animate={{
-        backgroundColor: scrolled ? "rgba(19, 19, 22, 0.8)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
-      }}
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 transition-all duration-300 border-b border-border/20 bg-bg/50 backdrop-blur-md"
     >
-      <div className="text-2xl font-semibold text-text">Xai</div>
-      
-      <div className="flex items-center gap-8">
+      <div className="text-xl font-bold tracking-tight text-text">Xai</div>
+
+      <div className="hidden md:flex items-center gap-8">
         {navLinks.map((link) => (
           <Link
             key={link.label}
             href={link.href}
-            className="text-sm text-text2 transition-colors duration-200 hover:text-text"
+            className="text-[11px] font-semibold tracking-widest text-text2 hover:text-text transition-colors duration-205"
           >
             {link.label}
           </Link>
         ))}
       </div>
 
-      <Button>Request Access</Button>
+      <Button variant="secondary" size="small" className="text-xs font-semibold tracking-wide border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-lg px-4 h-9">
+        Register for 1.0
+      </Button>
     </motion.nav>
   );
 }
