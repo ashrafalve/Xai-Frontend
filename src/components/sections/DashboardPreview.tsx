@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
+const EASING = [0.34, 1.56, 0.64, 1];
+
 const sidebarItems = [
   { label: "Overview", icon: "▶" },
   { label: "Data Sources", icon: "▼" },
@@ -42,10 +44,10 @@ export function DashboardPreview() {
         />
 
         <div className="mt-16 rounded-2xl border border-border bg-surface overflow-hidden">
-          <div className="flex">
-            <aside className="w-64 border-r border-border bg-surface2 p-4">
-              <div className="mb-8 text-xl font-semibold text-text">X</div>
-              <nav className="space-y-1">
+          <div className="flex flex-col lg:flex-row">
+            <aside className="w-full lg:w-64 border-b lg:border-b-0 lg:border-r border-border bg-surface2 p-4">
+              <div className="mb-4 text-xl font-semibold text-text">X</div>
+              <nav className="grid grid-cols-3 lg:grid-cols-1 gap-1">
                 {sidebarItems.map((item) => (
                   <button
                     key={item.label}
@@ -59,7 +61,7 @@ export function DashboardPreview() {
                     <span className={`text-xs ${activeSidebar === item.label ? "text-accent2" : "text-text3"}`}>
                       {item.icon}
                     </span>
-                    <span>{item.label}</span>
+                    <span className="truncate">{item.label}</span>
                   </button>
                 ))}
               </nav>
@@ -92,14 +94,14 @@ export function DashboardPreview() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={{
-                    visible: { transition: { staggerChildren: 0.1 } },
+                    visible: { transition: { staggerChildren: 0.1, ease: EASING } },
                     hidden: {},
                   }}
                 >
                   {statData.map((stat) => (
                     <motion.div
                       key={stat.label}
-                      variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                      variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { ease: EASING } } }}
                       className="rounded-xl border border-border bg-surface2 p-4"
                     >
                       <p className="text-sm text-text2">{stat.label}</p>
@@ -117,12 +119,12 @@ export function DashboardPreview() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={{
-                    visible: { transition: { staggerChildren: 0.15 } },
+                    visible: { transition: { staggerChildren: 0.15, ease: EASING } },
                     hidden: {},
                   }}
                 >
                   <motion.div
-                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { ease: EASING } } }}
                     className="rounded-xl border border-border bg-surface2 p-6"
                   >
                     <h3 className="text-sm font-medium text-text2 mb-4">Performance Trends</h3>
@@ -134,7 +136,7 @@ export function DashboardPreview() {
                   </motion.div>
 
                   <motion.div
-                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { ease: EASING } } }}
                     className="rounded-xl border border-border bg-surface2 overflow-hidden"
                   >
                     <div className="p-4 border-b border-border">

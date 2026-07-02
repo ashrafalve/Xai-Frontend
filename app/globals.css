@@ -12,8 +12,6 @@
   --color-accent2: #33E5C7;
 }
 
-@layer base {
-  body {
-    @apply bg-bg text-text font-sans;
-  }
+html {
+  scroll-behavior: smooth;
 }

@@ -6,6 +6,8 @@ import { Suspense, lazy } from "react";
 
 const ParticleField = lazy(() => import("@/components/three/ParticleField"));
 
+const EASING = [0.34, 1.56, 0.64, 1];
+
 export function Hero() {
   return (
     <section className="flex-1 pt-24 px-6">
@@ -15,12 +17,12 @@ export function Hero() {
           initial="hidden"
           animate="visible"
           variants={{
-            visible: { transition: { staggerChildren: 0.15 } },
+            visible: { transition: { staggerChildren: 0.15, ease: EASING } },
             hidden: {},
           }}
         >
           <motion.div
-            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { ease: EASING } } }}
           >
             <span className="inline-block px-4 py-1.5 text-xs font-medium text-accent2 uppercase tracking-wider border border-accent2/30 rounded-full w-fit">
               Intelligence Workspace
@@ -29,14 +31,14 @@ export function Hero() {
 
           <motion.h1
             className="mt-6 text-5xl font-semibold text-text leading-tight sm:text-6xl"
-            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { ease: EASING } } }}
           >
             From raw data to actionable intelligence.
           </motion.h1>
 
           <motion.p
             className="mt-6 text-lg text-text2 max-w-lg"
-            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { ease: EASING } } }}
           >
             Transform unstructured data into structured insights with our AI-powered platform.
             Visualize patterns, uncover hidden relationships, and make informed decisions faster.
@@ -44,15 +46,17 @@ export function Hero() {
 
           <motion.div
             className="mt-10 flex gap-4"
-            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { ease: EASING } } }}
           >
             <Button variant="primary">Get Started</Button>
             <Button variant="secondary">View Documentation</Button>
           </motion.div>
         </motion.div>
 
-        <div className="relative aspect-square rounded-2xl border border-border bg-surface2 overflow-hidden">
-          <Suspense fallback={<div className="w-full h-full bg-surface2 rounded-2xl" />}>
+        <div className="relative aspect-square rounded-2xl border border-border bg-surface2 overflow-hidden min-h-[300px]">
+          <Suspense fallback={
+            <div className="w-full h-full bg-surface2 rounded-2xl animate-pulse" />
+          }>
             <ParticleField />
           </Suspense>
         </div>

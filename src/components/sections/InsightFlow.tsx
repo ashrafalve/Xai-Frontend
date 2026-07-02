@@ -59,23 +59,21 @@ export function InsightFlow() {
                 borderColor: "var(--color-accent)",
                 backgroundColor: "var(--color-surface)",
                 duration: 0.3,
+                ease: "power2.out",
               });
               gsap.to(card.querySelectorAll(".bar"), {
                 backgroundColor: "var(--color-accent)",
-                height: (i: number, el: HTMLElement) => {
-                  const originalHeight = parseFloat(el.style.height) || 24;
-                  return `${originalHeight * 1.25}px`;
-                },
                 duration: 0.3,
+                ease: "power2.out",
               });
-              gsap.to(card.querySelectorAll("h3, p"), { opacity: 1, y: 0, duration: 0.3 });
             } else {
               gsap.to(card, {
                 borderColor: "var(--color-border)",
                 backgroundColor: "var(--color-surface2)",
                 duration: 0.3,
+                ease: "power2.out",
               });
-              gsap.to(card, { opacity: 0.7, duration: 0.3 });
+              gsap.to(card, { opacity: 0.7, duration: 0.3, ease: "power2.out" });
             }
           });
         },
