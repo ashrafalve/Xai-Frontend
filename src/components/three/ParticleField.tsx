@@ -12,27 +12,28 @@ function Particles() {
   const { pointer } = useThree();
 
   const positions = useMemo(() => {
-    const pos = new Float32Array(PARTICLE_COUNT * 3);
-    const gridPos = new Float32Array(PARTICLE_COUNT * 3);
+    const pos = new Float32Array(PARTICLE_COUNT * 3)
+    const gridPos = new Float32Array(PARTICLE_COUNT * 3)
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const i3 = i * 3;
-      const row = Math.floor(i / GRID_SIZE);
-      const col = i % GRID_SIZE;
-      const x = (col - GRID_SIZE / 2 + 0.5) * 0.8;
-      const y = (row - GRID_SIZE / 2 + 0.5) * 0.8;
-      const z = 0;
+      const i3 = i * 3
+      const row = Math.floor(i / GRID_SIZE)
+      const col = i % GRID_SIZE
+      const x = (col - GRID_SIZE / 2 + 0.5) * 0.8
+      const y = (row - GRID_SIZE / 2 + 0.5) * 0.8
+      const z = 0
 
-      gridPos[i3] = x;
-      gridPos[i3 + 1] = y;
-      gridPos[i3 + 2] = z;
+      gridPos[i3] = x
+      gridPos[i3 + 1] = y
+      gridPos[i3 + 2] = z
 
-      pos[i3] = (Math.random() - 0.5) * 15;
-      pos[i3 + 1] = (Math.random() - 0.5) * 15;
-      pos[i3 + 2] = (Math.random() - 0.5) * 15;
+      const seed = i * 0.107
+      pos[i3] = (seed - Math.floor(seed) - 0.5) * 15
+      pos[i3 + 1] = ((seed * 1.3) - Math.floor(seed * 1.3) - 0.5) * 15
+      pos[i3 + 2] = ((seed * 1.7) - Math.floor(seed * 1.7) - 0.5) * 15
     }
-    return { initial: pos, target: gridPos };
-  }, []);
+    return { initial: pos, target: gridPos }
+  }, [])
 
   const progressRef = useRef(0);
 

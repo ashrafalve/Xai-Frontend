@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
 import { Suspense, lazy } from "react";
 

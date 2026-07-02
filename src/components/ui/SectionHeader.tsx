@@ -2,11 +2,12 @@ interface SectionHeaderProps {
   eyebrow: string;
   title: string;
   subtitle?: string;
+  className?: string;
 }
 
-export function SectionHeader({ eyebrow, title, subtitle }: SectionHeaderProps) {
+export function SectionHeader({ eyebrow, title, subtitle, className }: SectionHeaderProps) {
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className={`flex flex-col items-center text-center ${className ?? ""}`}>
       <span className="text-xs font-medium text-accent2 uppercase tracking-wider">
         {eyebrow}
       </span>
