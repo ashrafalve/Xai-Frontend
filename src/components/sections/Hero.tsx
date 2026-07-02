@@ -6,7 +6,7 @@ import { Suspense, lazy } from "react";
 
 const ParticleField = lazy(() => import("@/components/three/ParticleField"));
 
-const EASING = [0.34, 1.56, 0.64, 1];
+const EASING = "easeOut";
 
 export function Hero() {
   return (
@@ -53,7 +53,7 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <div className="relative aspect-square rounded-2xl border border-border bg-surface2 overflow-hidden min-h-[300px]">
+        <div className="relative aspect-square rounded-2xl border border-border bg-surface2 overflow-hidden">
           <Suspense fallback={
             <div className="w-full h-full bg-surface2 rounded-2xl animate-pulse" />
           }>

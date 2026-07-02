@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
-const EASING = [0.34, 1.56, 0.64, 1];
+const EASING = "easeOut";
 
 const sidebarItems = [
   { label: "Overview", icon: "▶" },

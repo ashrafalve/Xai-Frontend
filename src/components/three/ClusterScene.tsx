@@ -93,9 +93,8 @@ function Points() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
+          args={[initial, 3]}
           count={POINT_COUNT}
-          array={initial}
-          itemSize={3}
         />
       </bufferGeometry>
       <pointsMaterial size={0.12} color="#7C6CFF" sizeAttenuation transparent opacity={0.7} />

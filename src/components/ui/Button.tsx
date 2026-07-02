@@ -3,9 +3,14 @@
 import { clsx } from "clsx";
 import { motion } from "framer-motion";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps {
   variant?: "primary" | "secondary";
   size?: "default" | "small";
+  className?: string;
+  children: React.ReactNode;
+  disabled?: boolean;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
 }
 
 export function Button({ variant = "primary", size = "default", className, children, ...props }: ButtonProps) {
