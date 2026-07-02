@@ -8,24 +8,24 @@ const ClusterScene = lazy(() => import("@/components/three/ClusterScene"));
 const deliverableLinks = [
   {
     label: "GITHUB REPOSITORY",
-    href: "https://github.com/ashik-racoai/xai-workspace",
-    urlText: "github.com/ashik/xai-workspace",
+    href: "https://github.com/ashrafalve/Xai-Frontend",
+    urlText: "github.com/ashrafalve/Xai-Frontend",
   },
   {
     label: "LIVE DEPLOYMENT",
-    href: "https://xai-workspace.vercel.app",
-    urlText: "xai-workspace.vercel.app",
+    href: "https://xaiworkspace.vercel.app/",
+    urlText: "xaiworkspace.vercel.app",
   },
   {
     label: "PRODUCT DOCUMENTATION",
-    href: "#",
-    urlText: "xai-intelligence-workspace-pdf",
+    href: "https://xaiworkspace.vercel.app/product_experience_prototype_documentation.md",
+    urlText: "xai-prototype-documentation.md",
   },
 ];
 
 export function SignatureInteraction() {
   return (
-    <section id="signature" className="py-28 px-8 bg-bg relative overflow-hidden">
+    <section id="signature" className="py-24 px-4 sm:px-8 bg-bg relative overflow-hidden">
       {/* Dynamic Background Glow */}
       <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-accent/2.5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[20%] left-[-10%] w-[350px] h-[350px] bg-accent2/2.5 rounded-full blur-[100px] pointer-events-none" />

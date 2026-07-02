@@ -8,12 +8,12 @@ const EASING = "easeInOut";
 
 // Sidebar configuration
 const sidebarItems = [
-  { id: "Tasks", label: "Tasks", icon: "⚡" },
-  { id: "Data Sources", label: "Data Sources", icon: "📂" },
-  { id: "Models", label: "Models", icon: "🧠" },
-  { id: "History", label: "History", icon: "🕒" },
-  { id: "Integrations", label: "Integrations", icon: "🔌" },
-  { id: "Settings", label: "Settings", icon: "⚙️" },
+  { id: "Tasks", label: "Tasks" },
+  { id: "Data Sources", label: "Data Sources" },
+  { id: "Models", label: "Models" },
+  { id: "History", label: "History" },
+  { id: "Integrations", label: "Integrations" },
+  { id: "Settings", label: "Settings" },
 ];
 
 // Mock dashboard databases per sidebar tab
@@ -188,6 +188,52 @@ const dashboardData: Record<string, {
   }
 };
 
+function SidebarIcon({ id }: { id: string }) {
+  const baseClass = "w-3.5 h-3.5 stroke-[2] fill-none stroke-current";
+  switch (id) {
+    case "Tasks":
+      return (
+        <svg className={baseClass} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        </svg>
+      );
+    case "Data Sources":
+      return (
+        <svg className={baseClass} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+        </svg>
+      );
+    case "Models":
+      return (
+        <svg className={baseClass} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 00.495-.032 5.99 5.99 0 004.582-4.582 3.75 3.75 0 00-.495-.032H12m0 4.646V18m0-11.354V6.25m0 16.5V21.5M12 2.25v.75m0 16.5a3.75 3.75 0 000-7.5" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12h15m-15 0a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 0115 0" />
+        </svg>
+      );
+    case "History":
+      return (
+        <svg className={baseClass} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      );
+    case "Integrations":
+      return (
+        <svg className={baseClass} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622a4.5 4.5 0 01-1.242-7.244l4.5-4.5a4.5 4.5 0 016.364 6.364l-1.756 1.757" />
+        </svg>
+      );
+    case "Settings":
+      return (
+        <svg className={baseClass} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.43l-1.003.828c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.99l1.005.831c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.43l1.004-.83c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.83a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      );
+    default:
+      return <span className="w-1.5 h-1.5 rounded-full bg-current" />;
+  }
+}
+
 export function DashboardPreview() {
   const [activeSidebar, setActiveSidebar] = useState("Tasks");
   const [hoveredBar, setHoveredBar] = useState<number | null>(null);
@@ -196,7 +242,7 @@ export function DashboardPreview() {
   const categoryData = dashboardData[activeSidebar] || dashboardData.Tasks;
 
   return (
-    <section className="py-28 px-8 bg-bg border-b border-border/20 relative overflow-hidden">
+    <section className="py-24 px-4 sm:px-8 bg-bg border-b border-border/20 relative overflow-hidden">
       <div className="absolute bottom-[10%] right-[10%] w-[450px] h-[450px] bg-accent/2.5 rounded-full blur-[110px] pointer-events-none" />
 
       <div className="mx-auto max-w-6xl">
@@ -220,12 +266,12 @@ export function DashboardPreview() {
                     key={item.id}
                     onClick={() => setActiveSidebar(item.id)}
                     className={`flex items-center gap-3 rounded-lg px-3.5 py-2.5 text-xs font-semibold tracking-wide transition-all w-full shrink-0 ${activeSidebar === item.id
-                        ? "bg-white/5 border border-white/10 text-white font-medium shadow-sm shadow-black/10"
-                        : "text-text2 hover:text-text hover:bg-white/2"
+                      ? "bg-white/5 border border-white/10 text-white font-medium shadow-sm shadow-black/10"
+                      : "text-text2 hover:text-text hover:bg-white/2"
                       }`}
                   >
-                    <span className={`text-[12px] opacity-80 ${activeSidebar === item.id ? "text-accent2" : "text-text3"}`}>
-                      {item.icon}
+                    <span className={`transition-colors duration-250 ${activeSidebar === item.id ? "text-accent2" : "text-text3"}`}>
+                      <SidebarIcon id={item.id} />
                     </span>
                     <span>{item.label}</span>
                   </button>
@@ -277,8 +323,8 @@ export function DashboardPreview() {
                           <p className="text-[11px] font-semibold tracking-wider text-text2 uppercase select-none">{stat.label}</p>
                           <span
                             className={`px-2 py-0.5 rounded text-[10px] font-medium border flex items-center gap-1 ${stat.pulsing
-                                ? "bg-accent2/10 border-accent2/35 text-accent2 shadow-[0_0_8px_rgba(51,229,199,0.15)]"
-                                : "bg-surface border-border text-text2"
+                              ? "bg-accent2/10 border-accent2/35 text-accent2 shadow-[0_0_8px_rgba(51,229,199,0.15)]"
+                              : "bg-surface border-border text-text2"
                               }`}
                           >
                             {stat.pulsing && (
@@ -330,8 +376,8 @@ export function DashboardPreview() {
                             <div
                               style={{ height: `${bar.value}%` }}
                               className={`w-full rounded-md transition-all duration-300 relative ${i % 2 === 0
-                                  ? "bg-gradient-to-t from-accent/40 to-accent"
-                                  : "bg-gradient-to-t from-accent2/45 to-accent2"
+                                ? "bg-gradient-to-t from-accent/40 to-accent"
+                                : "bg-gradient-to-t from-accent2/45 to-accent2"
                                 } ${hoveredBar === i
                                   ? "brightness-125 saturate-110 shadow-[0_0_12px_rgba(124,108,255,0.4)]"
                                   : ""
@@ -371,10 +417,10 @@ export function DashboardPreview() {
                             </div>
                             <span
                               className={`px-2.5 py-0.5 rounded text-[10px] font-semibold tracking-wide border ${task.status === "Completed"
-                                  ? "bg-emerald-500/10 border-emerald-500/35 text-emerald-400"
-                                  : task.status === "Processing"
-                                    ? "bg-amber-500/10 border-amber-500/35 text-amber-400 animate-pulse"
-                                    : "bg-rose-500/10 border-rose-500/35 text-rose-400"
+                                ? "bg-emerald-500/10 border-emerald-500/35 text-emerald-400"
+                                : task.status === "Processing"
+                                  ? "bg-amber-500/10 border-amber-500/35 text-amber-400 animate-pulse"
+                                  : "bg-rose-500/10 border-rose-500/35 text-rose-400"
                                 }`}
                             >
                               {task.status}

@@ -1,8 +1,8 @@
 # Xai – Intelligence Workspace
 ### Product Experience Prototype & Design-to-Code Engineering Execution
 **Prepared for:** RacoAI Frontend Engineering Challenge  
-**Prototype URL:** [xai-workspace.vercel.app](https://xai-workspace.vercel.app)  
-**Code Repository:** [github.com/ashik-racoai/xai-workspace](https://github.com/ashik-racoai/xai-workspace)  
+**Prototype URL:** [xaiworkspace.vercel.app](https://xaiworkspace.vercel.app/)  
+**Code Repository:** [github.com/ashrafalve/Xai-Frontend](https://github.com/ashrafalve/Xai-Frontend)  
 **Figma File Link:** [Figma Design Link](https://www.figma.com/design/nIA9tZFp8SWQPPL6zevbJl/Untitled?node-id=0-1&t=kxy29yHTcyMCaDcf-1)
 
 ---

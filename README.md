@@ -3,7 +3,7 @@
 
 This repository contains the engineering execution of the RacoAI Frontend Challenge. It is a single-page interactive product prototype that visually explains how Xai ingest, processes, and morphs raw data into structured intelligence and actionable automation pipelines.
 
-Live URL: [https://xai-workspace.vercel.app](https://xai-workspace.vercel.app)  
+Live URL: [https://xaiworkspace.vercel.app/](https://xaiworkspace.vercel.app/)  
 Design File: [Figma Mockup Design](https://www.figma.com/design/nIA9tZFp8SWQPPL6zevbJl/Untitled?node-id=0-1&t=kxy29yHTcyMCaDcf-1)
 
 ---
@@ -54,8 +54,8 @@ Make sure you have Node.js 18+ and npm installed.
 
 ### 1. Clone the repository and hop inward:
 ```bash
-git clone https://github.com/ashik-racoai/xai-workspace.git
-cd xai-workspace/xai
+git clone https://github.com/ashrafalve/Xai-Frontend.git
+cd Xai-Frontend/xai
 ```
 
 ### 2. Install dependencies:
@@ -88,5 +88,5 @@ npm run build
 
 ## 📄 Deliverable Links
 - **Product Documentation:** Detailed design choices are documented at `product_experience_prototype_documentation.md`.
-- **Live Deployment:** [xai-workspace.vercel.app](https://xai-workspace.vercel.app)
+- **Live Deployment:** [xaiworkspace.vercel.app](https://xaiworkspace.vercel.app/)
 - **Figma Design Link:** [Figma Design Canvas](https://www.figma.com/design/nIA9tZFp8SWQPPL6zevbJl/Untitled?node-id=0-1&t=kxy29yHTcyMCaDcf-1)

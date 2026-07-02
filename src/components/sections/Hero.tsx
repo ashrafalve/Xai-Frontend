@@ -10,7 +10,7 @@ const EASING = "easeOut";
 
 export function Hero() {
   return (
-    <section className="flex-1 pt-32 pb-16 px-8 bg-bg relative overflow-hidden">
+    <section className="flex-1 pt-32 pb-16 px-4 sm:px-8 bg-bg relative overflow-hidden">
       {/* Background glow effects */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent2/5 rounded-full blur-[100px] pointer-events-none" />

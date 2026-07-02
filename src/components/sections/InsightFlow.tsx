@@ -82,12 +82,12 @@ function StageCard({ number, title, description, isActive, type }: StageCardProp
               delay: bar.delay,
             }}
             className={`w-[7px] rounded-md transition-colors duration-450 ${isActive
-                ? type === "analyze"
-                  ? "bg-accent2 shadow-[0_0_8px_rgba(51,229,199,0.4)]"
-                  : type === "ingest"
-                    ? "bg-[#7C6CFF]/85 shadow-[0_0_8px_rgba(124,108,255,0.4)]"
-                    : "bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.4)]"
-                : "bg-surface border border-border/80"
+              ? type === "analyze"
+                ? "bg-accent2 shadow-[0_0_8px_rgba(51,229,199,0.4)]"
+                : type === "ingest"
+                  ? "bg-[#7C6CFF]/85 shadow-[0_0_8px_rgba(124,108,255,0.4)]"
+                  : "bg-indigo-400 shadow-[0_0_8px_rgba(129,140,248,0.4)]"
+              : "bg-surface border border-border/80"
               }`}
           />
         ))}
@@ -124,7 +124,7 @@ export function InsightFlow() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="stages" className="py-28 px-8 bg-bg relative overflow-hidden border-b border-border/20">
+    <section ref={sectionRef} id="stages" className="py-24 px-4 sm:px-8 bg-bg relative overflow-hidden border-b border-border/20">
       <div className="absolute top-[30%] left-[20%] w-[350px] h-[350px] bg-accent2/2.5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="mx-auto max-w-6xl">
